@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 
   def create
     post = Post.create!(post_params)
-    redirect_to post
+    redirect_to @post
   end
 
   def edit
@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
   def update
     @post.update!(post_params)
-    redirect_to post
+    redirect_to @post
   end
 
   def destroy
@@ -31,6 +31,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :content)
